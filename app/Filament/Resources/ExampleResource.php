@@ -24,13 +24,11 @@ class ExampleResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()
                     ->label('Nombre')
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_active')
-                    ->required(),
+ ,
                 Forms\Components\Checkbox::make('accept_terms')
-                    ->required()
                     ->label('Aceptar términos'),
                 Forms\Components\Radio::make('gender')
                     ->options([
@@ -39,18 +37,20 @@ class ExampleResource extends Resource
                         'other' => 'Otro',
                     ])
                     ->label('Género')
-                    ->required(),
+,
                 Forms\Components\FileUpload::make('file_path')
                         ->preserveFilenames()
                         ->uploadingMessage('Subiendo archivo...')
                         ->acceptedFileTypes(['application/pdf'])
-                        ->multiple()
                     ->label('Archivo'),
                 Forms\Components\RichEditor::make('description')
                     ->label('Descripción')
                     ->columnSpanFull(),
-                Forms\Components\TagsInput::make('tags'),
-                Forms\Components\KeyValue::make('key_values'),
+                Forms\Components\TagsInput::make('tags')
+                    ->label('Etiquetas')
+                    ->placeholder('Añade etiquetas'),
+                Forms\Components\KeyValue::make('key_values')
+                    ->reorderable(),
             ]);
     }
 
